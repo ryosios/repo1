@@ -21,11 +21,23 @@ MonoBehaviour:
   - run
   - idle
   - idle
+  - jump
+  - run
+  - down
+  - down
   toAnimation:
   - jump
   - jump
   - run
+  - down
+  - down
+  - run
+  - jump
   duration:
+  - 0
+  - 0
+  - 0
+  - 0
   - 0
   - 0
   - 0

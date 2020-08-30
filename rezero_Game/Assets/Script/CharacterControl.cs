@@ -55,7 +55,7 @@ public class CharacterControl : MonoBehaviour
             character_image_tf.localScale = new Vector3(1,1,1);
 
             //==========モーション============
-            if (!character_Spine.AnimationName.Equals("run"))
+            if (!character_Spine.AnimationName.Equals("run")&& !character_Spine.AnimationName.Equals("jump"))
             {
                 character_Spine.state.SetAnimation(0, "run", true);
             }
@@ -66,10 +66,12 @@ public class CharacterControl : MonoBehaviour
             //==========移動============
             character_speed_x = new Vector3(-character_speed, character_rigid2D.velocity.y, 0);
             character_rigid2D.velocity = character_speed_x;
-            character_image_tf.localScale = new Vector3(-1, 1, 1);
+
+            // character_image_tf.localScale = new Vector3(-1, 1, 1);
+            character_image_tf.localScale = new Vector3(1, 1, 1);
 
             //==========モーション============
-            if (!character_Spine.AnimationName.Equals("run"))
+            if (!character_Spine.AnimationName.Equals("run") && !character_Spine.AnimationName.Equals("jump"))
             {
                 character_Spine.state.SetAnimation(0, "run", true);
             }
@@ -104,9 +106,10 @@ public class CharacterControl : MonoBehaviour
                 //==========移動============
                 character_rigid2D.velocity = new Vector3(0, 0, 0);
                 character_rigid2D.AddForce(-character_speed_y);
+              
 
                 //==========モーション============
-                character_Spine.state.SetAnimation(0, "jump", false);
+                character_Spine.state.SetAnimation(0, "down", false);
                 character_Spine.state.AddAnimation(0, "run", true, 0);
             }
         }
@@ -125,7 +128,8 @@ public class CharacterControl : MonoBehaviour
                 character_rigid2D.velocity = new Vector3(0, 0, 0);
 
                 //==========モーション============
-                character_Spine.state.SetAnimation(0, "idle", true);
+                // character_Spine.state.SetAnimation(0, "idle", true);
+                character_Spine.state.SetAnimation(0, "run", true);
 
             }
         }
@@ -146,7 +150,8 @@ public class CharacterControl : MonoBehaviour
             character_jump_counter = 0; //ジャンプ回数初期化
             if (!character_Spine.AnimationName.Equals("idle"))//モーション初期化
             {
-                character_Spine.state.SetAnimation(0, "idle", true);
+                // character_Spine.state.SetAnimation(0, "idle", true);
+                character_Spine.state.SetAnimation(0, "run", true);
                 Debug.Log("koko");
             }
         }
