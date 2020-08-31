@@ -31,6 +31,8 @@ public class CharacterControl : MonoBehaviour
         
         character_speed_y = new Vector3(0, character_jump_speed, 0);
 
+        character_Spine.state.SetAnimation(0, "run", true);
+
     }
 
     // Update is called once per frame
@@ -152,7 +154,7 @@ public class CharacterControl : MonoBehaviour
             {
                 // character_Spine.state.SetAnimation(0, "idle", true);
                 character_Spine.state.SetAnimation(0, "run", true);
-                Debug.Log("koko");
+              
             }
         }
         else
@@ -164,7 +166,7 @@ public class CharacterControl : MonoBehaviour
 
     void OnCollisionStay2D(Collision2D collision)
     {
-      // Debug.Log(collision.gameObject.tag);
+      
         if (collision.gameObject.tag.Equals("earth"))
         {
 
