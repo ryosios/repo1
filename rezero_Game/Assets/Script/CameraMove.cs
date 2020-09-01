@@ -7,11 +7,16 @@ public class CameraMove : MonoBehaviour
     public Transform Character_locator;
     Vector3 character_pos;
     Vector3 camera_pos;
+    Vector3 camera_pos_start;
+
+    float chara_camera_offset = 0.5f;
+    
     Vector3 chara_offset;
     // Start is called before the first frame update
     void Start()
     {
-        chara_offset = OffSet( this.transform.position, Character_locator.position);   
+        chara_offset = OffSet( this.transform.position, Character_locator.position);
+        camera_pos_start = this.transform.position;
     }
 
     // Update is called once per frame
@@ -22,11 +27,21 @@ public class CameraMove : MonoBehaviour
 
     void CameraSetting()
     {
+        
         character_pos =  Character_locator.position;
         camera_pos =  this.transform.position;
-        camera_pos.y = character_pos.y;
-        camera_pos.y += chara_offset.y;
-        this.transform.position = camera_pos;
+
+        if (character_pos.y+chara_camera_offset >camera_pos_start.y)
+        {
+            camera_pos.y = character_pos.y+chara_camera_offset;
+            // camera_pos.y += chara_offset.y;
+            this.transform.position = camera_pos;
+
+        }
+        else
+        {
+            this.transform.position = camera_pos_start;
+        }
 
         if(this.transform.position.y> 8f)
         {

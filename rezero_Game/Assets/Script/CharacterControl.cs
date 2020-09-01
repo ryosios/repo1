@@ -21,7 +21,9 @@ public class CharacterControl : MonoBehaviour
     int character_jump_counter = 0;
 
     public bool is_special = false;//special判定
+    public bool is_attack = false;
 
+    public AttackSlider AttackSliderScript; 
 
 
     // Start is called before the first frame update
@@ -40,10 +42,17 @@ public class CharacterControl : MonoBehaviour
     {
        
         VerticalMove();
-        HorizontalMove();
-        StopMove();
-        
 
+        HorizontalMove();
+
+        StopMove();
+
+        CharacterMoveLimit();
+
+        
+        AttackMove();
+       
+        
     }
 
     void HorizontalMove()
@@ -57,9 +66,9 @@ public class CharacterControl : MonoBehaviour
             character_image_tf.localScale = new Vector3(1,1,1);
 
             //==========モーション============
-            if (!character_Spine.AnimationName.Equals("run")&& !character_Spine.AnimationName.Equals("jump"))
+            if (!character_Spine.AnimationName.Equals("run2")&& !character_Spine.AnimationName.Equals("jump") && !character_Spine.AnimationName.Equals("attack"))
             {
-                character_Spine.state.SetAnimation(0, "run", true);
+                character_Spine.state.SetAnimation(0, "run2", true);
             }
 
         }
@@ -73,7 +82,7 @@ public class CharacterControl : MonoBehaviour
             character_image_tf.localScale = new Vector3(1, 1, 1);
 
             //==========モーション============
-            if (!character_Spine.AnimationName.Equals("run") && !character_Spine.AnimationName.Equals("jump"))
+            if (!character_Spine.AnimationName.Equals("run") && !character_Spine.AnimationName.Equals("jump") && !character_Spine.AnimationName.Equals("attack"))
             {
                 character_Spine.state.SetAnimation(0, "run", true);
             }
@@ -133,14 +142,50 @@ public class CharacterControl : MonoBehaviour
                 // character_Spine.state.SetAnimation(0, "idle", true);
                 character_Spine.state.SetAnimation(0, "run", true);
 
+               
+
             }
         }
 
     }
 
+    void CharacterMoveLimit()
+    {
+        if(this.transform.position.x<-4.5f) {
 
-  
+            Vector3 chara_pos = transform.position;
+            chara_pos.x = -4.5f;
+            transform.position = chara_pos;
+        }
+        if(this.transform.position.x > 3f)
+        {
+            Vector3 chara_pos = transform.position;
+            chara_pos.x = 3f;
+            transform.position = chara_pos;
+        }
 
+    }
+
+    void AttackMove()
+    {
+        if (AttackSliderScript.is_attack_slider_full == true)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                //==========モーション============
+                character_Spine.state.SetAnimation(0, "attack", false);
+                character_Spine.state.AddAnimation(0, "run", true, 0);
+
+                //==========bool============
+                is_attack = true;
+            }
+        }
+        else
+        {
+            is_attack = false;
+        }
+
+    }
    
 
    
