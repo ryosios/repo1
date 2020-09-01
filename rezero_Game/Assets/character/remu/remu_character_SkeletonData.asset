@@ -25,6 +25,12 @@ MonoBehaviour:
   - run
   - down
   - down
+  - attack
+  - down
+  - jump
+  - idle
+  - run
+  - run2
   toAnimation:
   - jump
   - jump
@@ -33,7 +39,19 @@ MonoBehaviour:
   - down
   - run
   - jump
+  - change
+  - change
+  - change
+  - change
+  - change
+  - change
   duration:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   - 0
   - 0
   - 0
