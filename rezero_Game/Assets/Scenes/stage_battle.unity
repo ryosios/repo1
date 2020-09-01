@@ -5944,7 +5944,7 @@ GameObject:
   m_Component:
   - component: {fileID: 972011639}
   - component: {fileID: 972011640}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Character_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5992,7 +5992,7 @@ GameObject:
   - component: {fileID: 982791079}
   - component: {fileID: 982791081}
   - component: {fileID: 982791080}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: earth
   m_TagString: earth
   m_Icon: {fileID: 0}
@@ -12674,7 +12674,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1869755878}
   - component: {fileID: 1869755880}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Character_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
