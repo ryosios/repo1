@@ -5,6 +5,7 @@ using UnityEngine.Playables;
 
 
 
+
 public class GameMaster : MonoBehaviour
 {
     public PlayableDirector StartCutinTimeline;
@@ -19,6 +20,10 @@ public class GameMaster : MonoBehaviour
 
     public float totalTime = 3;
     int seconds;
+
+    public float timer_time = 60;
+ 
+    
 
     int count_gamestart = 0;
     // Start is called before the first frame update
@@ -42,8 +47,11 @@ public class GameMaster : MonoBehaviour
             {
                 //ゲーム開始時一回だけ処理
                 CharacterControl.enabled = true;
-                
+
+                count_gamestart = 1;
             }
+
+            Timer();
         }
         
         
@@ -66,5 +74,21 @@ public class GameMaster : MonoBehaviour
         
     }
 
-   
+    void Timer()
+    {
+        timer_time -= Time.deltaTime;
+
+
+        if (timer_time < 0)
+        {
+            timer_time = 0;
+            
+
+        }
+       
+
+
+    }
+
+
 }

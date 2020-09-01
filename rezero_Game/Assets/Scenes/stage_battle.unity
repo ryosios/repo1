@@ -5306,7 +5306,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 669.66, y: 375}
-  m_SizeDelta: {x: 1334, y: 750}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &530255185
 MonoBehaviour:
@@ -5434,7 +5434,7 @@ Camera:
   m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
+  m_ForceIntoRT: 1
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -5992,7 +5992,7 @@ GameObject:
   - component: {fileID: 982791079}
   - component: {fileID: 982791081}
   - component: {fileID: 982791080}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: earth
   m_TagString: earth
   m_Icon: {fileID: 0}
@@ -6550,7 +6550,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1340270117}
   - component: {fileID: 1340270118}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Stage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12204,6 +12204,7 @@ GameObject:
   - component: {fileID: 1780310308}
   - component: {fileID: 1780310310}
   - component: {fileID: 1780310309}
+  - component: {fileID: 1780310311}
   m_Layer: 5
   m_Name: time_text
   m_TagString: Untagged
@@ -12276,8 +12277,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 52.84
+  m_fontSizeBase: 52.84
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -12293,7 +12294,7 @@ MonoBehaviour:
   m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -12348,6 +12349,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1780310307}
   m_CullTransparentMesh: 0
+--- !u!114 &1780310311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780310307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52fee3c34920b5a459a1a4ba41608f14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameMasterSC: {fileID: 1785583517}
 --- !u!1 &1784353767
 GameObject:
   m_ObjectHideFlags: 0
@@ -12455,6 +12469,7 @@ MonoBehaviour:
   BackGroundMaker: {fileID: 1340270118}
   CharacterControl: {fileID: 2057624742}
   totalTime: 3
+  timer_time: 60
 --- !u!4 &1785583518
 Transform:
   m_ObjectHideFlags: 0
@@ -12990,8 +13005,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 49.4
+  m_fontSizeBase: 49.4
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -13007,7 +13022,7 @@ MonoBehaviour:
   m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -13542,10 +13557,30 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1476210489328628215, guid: 8793e0fed9265d04eb7d0be661ea240f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4040273338919181522, guid: 8793e0fed9265d04eb7d0be661ea240f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4040273338919181524, guid: 8793e0fed9265d04eb7d0be661ea240f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4040273338919181526, guid: 8793e0fed9265d04eb7d0be661ea240f,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4040273338919181526, guid: 8793e0fed9265d04eb7d0be661ea240f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8793e0fed9265d04eb7d0be661ea240f, type: 3}
@@ -13575,6 +13610,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: remu
+      objectReference: {fileID: 0}
+    - target: {fileID: 7999404643366690651, guid: 8220409e37a02c540bc09a786b850384,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7999404643366690655, guid: 8220409e37a02c540bc09a786b850384,
         type: 3}
