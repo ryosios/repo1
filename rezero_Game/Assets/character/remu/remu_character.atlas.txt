@@ -1,19 +1,19 @@
 
 remu_character.png
-size: 1024,1024
+size: 2048,1024
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 arm_L_1
   rotate: false
-  xy: 749, 485
+  xy: 843, 769
   size: 41, 59
   orig: 44, 62
   offset: 1, 1
   index: -1
 arm_L_2
   rotate: false
-  xy: 797, 846
+  xy: 749, 312
   size: 59, 76
   orig: 62, 80
   offset: 2, 3
@@ -34,28 +34,28 @@ arm_L_3
   index: -1
 arm_R_1
   rotate: true
-  xy: 805, 205
+  xy: 537, 635
   size: 84, 126
   orig: 84, 126
   offset: 0, 0
   index: -1
 body
-  rotate: true
-  xy: 851, 291
+  rotate: false
+  xy: 966, 11
   size: 148, 153
   orig: 148, 153
   offset: 0, 0
   index: -1
 body_back_L
   rotate: false
-  xy: 805, 429
+  xy: 748, 635
   size: 44, 115
   orig: 44, 115
   offset: 0, 0
   index: -1
 body_back_R
   rotate: false
-  xy: 749, 314
+  xy: 794, 637
   size: 40, 113
   orig: 40, 113
   offset: 0, 0
@@ -102,58 +102,79 @@ ef_ring_1
   orig: 400, 400
   offset: 46, 46
   index: -1
+ef_smoke_1A
+  rotate: true
+  xy: 725, 752
+  size: 270, 116
+  orig: 301, 188
+  offset: 6, 0
+  index: -1
+ef_smoke_1B
+  rotate: true
+  xy: 537, 721
+  size: 301, 186
+  orig: 301, 188
+  offset: 0, 1
+  index: -1
+ef_smoke_1C
+  rotate: true
+  xy: 749, 390
+  size: 243, 185
+  orig: 301, 188
+  offset: 36, 2
+  index: -1
 face_1
   rotate: true
-  xy: 537, 671
+  xy: 1034, 862
   size: 160, 159
   orig: 160, 159
   offset: 0, 0
   index: -1
 face_2
   rotate: true
-  xy: 698, 671
+  xy: 805, 150
   size: 160, 159
   orig: 160, 159
   offset: 0, 0
   index: -1
 face_3
-  rotate: false
-  xy: 859, 763
+  rotate: true
+  xy: 936, 490
   size: 160, 159
   orig: 160, 159
   offset: 0, 0
   index: -1
 hair
-  rotate: false
-  xy: 537, 833
+  rotate: true
+  xy: 843, 830
   size: 192, 189
   orig: 192, 189
   offset: 0, 0
   index: -1
 hair_acc
-  rotate: false
-  xy: 749, 855
+  rotate: true
+  xy: 972, 782
   size: 46, 124
   orig: 46, 124
   offset: 0, 0
   index: -1
 hair_side
   rotate: true
-  xy: 805, 924
+  xy: 836, 652
   size: 98, 195
   orig: 98, 195
   offset: 0, 0
   index: -1
 head
-  rotate: false
-  xy: 859, 602
+  rotate: true
+  xy: 936, 328
   size: 160, 159
   orig: 160, 159
   offset: 0, 0
   index: -1
 head2
-  rotate: false
-  xy: 851, 441
+  rotate: true
+  xy: 966, 166
   size: 160, 159
   orig: 160, 159
   offset: 0, 0
@@ -166,8 +187,8 @@ head_acc_1
   offset: 0, 0
   index: -1
 head_acc_2
-  rotate: true
-  xy: 791, 386
+  rotate: false
+  xy: 886, 771
   size: 41, 57
   orig: 41, 57
   offset: 0, 0
@@ -181,35 +202,35 @@ head_back
   index: -1
 leg_L_1
   rotate: false
-  xy: 805, 546
+  xy: 805, 25
   size: 44, 123
   orig: 44, 123
   offset: 0, 0
   index: -1
 leg_R_1
   rotate: false
-  xy: 749, 546
+  xy: 851, 25
   size: 44, 123
   orig: 44, 123
   offset: 0, 0
   index: -1
 neck_1
-  rotate: false
-  xy: 749, 981
+  rotate: true
+  xy: 929, 778
   size: 50, 41
   orig: 50, 41
   offset: 0, 0
   index: -1
 neck_2
   rotate: false
-  xy: 537, 634
+  xy: 810, 353
   size: 35, 35
   orig: 35, 35
   offset: 0, 0
   index: -1
 tuno
-  rotate: false
-  xy: 933, 208
+  rotate: true
+  xy: 665, 635
   size: 84, 81
   orig: 94, 91
   offset: 3, 4

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Spine.Unity;
+using Spine;
 
 public class CharacterControl : MonoBehaviour
 {
@@ -11,8 +12,8 @@ public class CharacterControl : MonoBehaviour
     [SerializeField] float character_jump_speed =10000f;
     [SerializeField] bool on_earth;//接地判定
     [SerializeField] Transform character_image_tf;
-    [SerializeField] GameObject[] character_Spine = new GameObject[2] ;
-    SkeletonAnimation[] character_Spine_skel = new SkeletonAnimation[2];
+    [SerializeField] GameObject[] character_Spine = new GameObject[3] ;
+    SkeletonAnimation[] character_Spine_skel = new SkeletonAnimation[3];
 
     Vector3 character_speed_x;
     Vector3 character_speed_y;
@@ -26,18 +27,19 @@ public class CharacterControl : MonoBehaviour
 
     public AttackSlider AttackSliderScript;
 
-    int character_number = 0;// レム０　ラム１
+    int character_number = 0;// レム０　ラム１ レム2
 
 
     // Start is called before the first frame update
 
     private void Awake()
     {
-        for(int i = 0; i<2; i++)
+        for(int i = 0; i<3; i++)
         {
             character_Spine_skel[i] = character_Spine[i].GetComponent<SkeletonAnimation>();
         }
         character_Spine[1].SetActive(false);
+        character_Spine[2].SetActive(false);
     }
 
     void Start()
@@ -64,6 +66,7 @@ public class CharacterControl : MonoBehaviour
 
         
         AttackMove();
+        SpecialMove();
 
         ChangeMove();
 
@@ -205,26 +208,60 @@ public class CharacterControl : MonoBehaviour
 
     }
 
+    void SpecialMove()
+    {
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            //==========モーション============
+            
+            
+
+            if (character_number == 0 )
+            {
+               
+                character_Spine_skel[0].state.SetAnimation(0, "special", false).Complete += delegate {
+                    character_number = 2;
+                    character_Spine[0].SetActive(false);
+                    character_Spine[1].SetActive(false);
+                    character_Spine[2].SetActive(true);
+                    character_Spine_skel[2].state.SetAnimation(0, "run", true);
+                };
+
+            }
+
+            else if(character_number == 1)
+            {
+                character_Spine_skel[1].state.SetAnimation(0, "special", false);
+            } 
+        }
+
+      
+
+    }
+
     void ChangeMove()
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            if (character_number == 0)
+            if(character_number ==0 || character_number == 1)
             {
-                character_number = 1;
-                character_Spine[0].SetActive(false);
-                character_Spine[1].SetActive(true);
-                character_Spine_skel[1].state.SetAnimation(0, "change", false);
-                character_Spine_skel[1].state.AddAnimation(0, "run", true,0);
-            }
-            else
-            {
-                character_number = 0;
-                character_Spine[1].SetActive(false);
-                character_Spine[0].SetActive(true);
-                character_Spine_skel[0].state.SetAnimation(0, "change", false);
-                character_Spine_skel[0].state.AddAnimation(0, "run", true,0);
+                if (character_number == 0)
+                {
+                    character_number = 1;
+                    character_Spine[0].SetActive(false);
+                    character_Spine[1].SetActive(true);
+                    character_Spine_skel[1].state.SetAnimation(0, "change", false);
+                    character_Spine_skel[1].state.AddAnimation(0, "run", true, 0);
+                }
+                else
+                {
+                    character_number = 0;
+                    character_Spine[1].SetActive(false);
+                    character_Spine[0].SetActive(true);
+                    character_Spine_skel[0].state.SetAnimation(0, "change", false);
+                    character_Spine_skel[0].state.AddAnimation(0, "run", true, 0);
 
+                }
             }
 
         }
@@ -234,9 +271,9 @@ public class CharacterControl : MonoBehaviour
         
 
     }
-   
 
-   
+    
+
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -246,7 +283,7 @@ public class CharacterControl : MonoBehaviour
             if (!character_Spine_skel[character_number].AnimationName.Equals("idle"))//モーション初期化
             {
                 // character_Spine.state.SetAnimation(0, "idle", true);
-                character_Spine_skel[character_number].state.SetAnimation(0, "run", true);
+                character_Spine_skel[character_number].state.AddAnimation(0, "run", true,0);
               
             }
         }
