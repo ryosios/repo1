@@ -87,17 +87,23 @@ public class CharacterControl : MonoBehaviour
 
         CharacterMoveLimit();
 
-        
-        AttackMove();
+
+        if (!GameMasterSC.during_special)
+        {
+            AttackMove();
+        }
 
         if (GameMasterSC.special_count > 0 && GameMasterSC.during_special == false)//カウント０以上、必殺技期間でないとき
         {
             SpecialMove();
         }
 
-        ChangeMove();
+        if (!GameMasterSC.during_special)
+        {
+            ChangeMove();
+        }
 
-        
+
 
     }
 
