@@ -6,10 +6,12 @@ using UnityEngine.UI;
 public class AttackSlider : MonoBehaviour
 {
     [SerializeField] Image attack_slider_fill_Im = default;
+    [SerializeField] GameMaster GameMasterSC = default;
+
     Color attack_slider_fill_defaultcolor;
     public Slider attack_slider;
-    public GameMaster GameMaster;
-    public CharacterControl CharacterControl;
+    
+   
     float attack_slider_speed = 0.5f;
 
 
@@ -32,7 +34,7 @@ public class AttackSlider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameMaster.is_game_playing == true)
+        if (GameMasterSC.is_game_playing == true)
         {
             AttackCount();
         }
@@ -53,7 +55,7 @@ public class AttackSlider : MonoBehaviour
 
         }
 
-        if (CharacterControl.is_attack == true)
+        if (GameMasterSC.is_attack == true)
         {
             attack_slider.value = 0;
             is_attack_slider_full = false;

@@ -33,6 +33,14 @@ public class GameMaster : MonoBehaviour
     public bool is_invincible = false;
     public float invincible_time = 0.5f;
 
+    public int character_number = 0;// レム０　ラム１ レム2
+
+    public bool is_attack = false;//アタック判定
+    public bool is_special = false;//special判定１F
+    public bool during_special = false;//specialモーション中
+
+    public int special_count = 3;//specialうてる回数
+
     [SerializeField] CircleCollider2D Character_Image_collider = default;
 
 
@@ -65,8 +73,16 @@ public class GameMaster : MonoBehaviour
         }
 
 
+        if (during_special)
+        {
+            invincibleTime_Special();
+        }
+        else
+        {
+            InvincibleTime();
+        }
 
-        InvincibleTime();
+        
         
 
 
@@ -118,5 +134,17 @@ public class GameMaster : MonoBehaviour
         }
     }
 
+    void invincibleTime_Special()
+    {
+        if (during_special)
+        {
+            Character_Image_collider.enabled = false;
+        }
+        else
+        {
+            Character_Image_collider.enabled = true;
+
+        }
+    }
 
 }

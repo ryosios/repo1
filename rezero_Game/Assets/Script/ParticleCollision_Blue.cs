@@ -48,7 +48,10 @@ public class ParticleCollision_Blue : MonoBehaviour
     private IEnumerator InvincibleTimer()
     {
         yield return new WaitForSeconds(GameMsterSC.invincible_time);
-        GameMsterSC.is_invincible = false;
-       
+
+        if (!GameMsterSC.during_special)
+        {
+            GameMsterSC.is_invincible = false;
+        }
     }
 }

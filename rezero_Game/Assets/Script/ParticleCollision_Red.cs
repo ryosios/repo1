@@ -48,7 +48,13 @@ public class ParticleCollision_Red : MonoBehaviour
     private IEnumerator InvincibleTimer()
     {
         yield return new WaitForSeconds(GameMsterSC.invincible_time);
-        GameMsterSC.is_invincible = false;
+        //ここ注意
+        //必殺技使用中はfalseにしない。必殺技のほうでfalseにする
+        if(!GameMsterSC.during_special)
+        {
+            GameMsterSC.is_invincible = false;
+
+        }
 
     }
 }
