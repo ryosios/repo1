@@ -14,6 +14,14 @@ public class CharacterControl : MonoBehaviour
     [SerializeField] Transform character_image_tf;
     [SerializeField] GameObject[] character_Spine = new GameObject[3] ;
     SkeletonAnimation[] character_Spine_skel = new SkeletonAnimation[3];
+    [SerializeField] CircleCollider2D[] AttackCollision = new CircleCollider2D[3];
+
+    [SerializeField] ParticleSystem ef_rem2End;
+    [SerializeField] ParticleSystem ef_rem2moya;
+    [SerializeField] ParticleSystem ef_backgroundDark;
+    
+
+
 
     Vector3 character_speed_x;
     Vector3 character_speed_y;
@@ -22,11 +30,14 @@ public class CharacterControl : MonoBehaviour
 
     int character_jump_counter = 0;
 
-    public bool is_special = false;//special判定
-    public bool is_attack = false;
+    public bool is_special = false;//special判定１F
+    public bool during_special = false;//specialモーション中
+    public bool is_attack = false;//アタック判定
 
     public AttackSlider AttackSliderScript;
 
+
+    int special_count = 3;//specialうてる回数
     int character_number = 0;// レム０　ラム１ レム2
 
 
@@ -34,12 +45,15 @@ public class CharacterControl : MonoBehaviour
 
     private void Awake()
     {
-        for(int i = 0; i<3; i++)
+        for(int i = 0; i<character_Spine.Length; i++)
         {
             character_Spine_skel[i] = character_Spine[i].GetComponent<SkeletonAnimation>();
         }
         character_Spine[1].SetActive(false);
         character_Spine[2].SetActive(false);
+
+        AttackCollision[1].enabled = false;
+        AttackCollision[2].enabled = false;
     }
 
     void Start()
@@ -66,11 +80,15 @@ public class CharacterControl : MonoBehaviour
 
         
         AttackMove();
-        SpecialMove();
+
+        if (special_count > 0 && during_special == false)//カウント０以上、必殺技期間でないとき
+        {
+            SpecialMove();
+        }
 
         ChangeMove();
 
-
+        
 
     }
 
@@ -86,7 +104,8 @@ public class CharacterControl : MonoBehaviour
 
             //==========モーション============
             if (!character_Spine_skel[character_number].AnimationName.Equals("run2")&& !character_Spine_skel[character_number].AnimationName.Equals("jump")
-                && !character_Spine_skel[character_number].AnimationName.Equals("attack") && !character_Spine_skel[character_number].AnimationName.Equals("change"))
+                && !character_Spine_skel[character_number].AnimationName.Equals("attack") && !character_Spine_skel[character_number].AnimationName.Equals("change")
+                && !character_Spine_skel[character_number].AnimationName.Equals("special"))
             {
                 character_Spine_skel[character_number].state.SetAnimation(0, "run2", true);
             }
@@ -103,7 +122,8 @@ public class CharacterControl : MonoBehaviour
 
             //==========モーション============
             if (!character_Spine_skel[character_number].AnimationName.Equals("run") && !character_Spine_skel[character_number].AnimationName.Equals("jump") 
-                && !character_Spine_skel[character_number].AnimationName.Equals("attack")&& !character_Spine_skel[character_number].AnimationName.Equals("change"))
+                && !character_Spine_skel[character_number].AnimationName.Equals("attack")&& !character_Spine_skel[character_number].AnimationName.Equals("change")
+                && !character_Spine_skel[character_number].AnimationName.Equals("special"))
             {
                 character_Spine_skel[character_number].state.SetAnimation(0, "run", true);
             }
@@ -125,7 +145,10 @@ public class CharacterControl : MonoBehaviour
                 character_jump_counter += 1;
 
                 //==========モーション============
-                character_Spine_skel[character_number].state.SetAnimation(0, "jump", false);
+                if (!character_Spine_skel[character_number].AnimationName.Equals("special"))
+                {
+                    character_Spine_skel[character_number].state.SetAnimation(0, "jump", false);
+                }
                 character_Spine_skel[character_number].state.AddAnimation(0, "run", true,0);
 
             }
@@ -212,31 +235,72 @@ public class CharacterControl : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.D))
         {
-            //==========モーション============
-            
-            
-
             if (character_number == 0 )
             {
-               
+                is_special = true;
+                during_special = true;
+                special_count -= 1;
+
+                ef_backgroundDark.Play();
+
+
                 character_Spine_skel[0].state.SetAnimation(0, "special", false).Complete += delegate {
                     character_number = 2;
                     character_Spine[0].SetActive(false);
                     character_Spine[1].SetActive(false);
                     character_Spine[2].SetActive(true);
+                    AttackCollision[0].enabled = false;
+                    AttackCollision[1].enabled = false;
+                    AttackCollision[2].enabled = true;
+
                     character_Spine_skel[2].state.SetAnimation(0, "run", true);
+
+                    during_special = false;
+                    ef_rem2moya.Play();
+
+                    StartCoroutine("remu2_finish");
                 };
 
             }
 
             else if(character_number == 1)
             {
-                character_Spine_skel[1].state.SetAnimation(0, "special", false);
+                is_special = true;
+                special_count -= 1;
+                during_special = true;
+
+                ef_backgroundDark.Play();
+
+                character_Spine_skel[1].state.SetAnimation(0, "special", false).Complete += delegate
+                {
+                    during_special = false;
+                };
+                character_Spine_skel[1].state.AddAnimation(0, "run", true,0);
             } 
         }
+        else
+        {
+            is_special = false;
+        }
 
-      
+    }
 
+    private IEnumerator remu2_finish()
+    {
+        yield return new WaitForSeconds(5.0f);
+        character_Spine[0].SetActive(true);
+        character_Spine[1].SetActive(false);
+        character_Spine[2].SetActive(false);
+
+        AttackCollision[0].enabled = true;
+        AttackCollision[1].enabled = false;
+        AttackCollision[2].enabled = false;
+
+        ef_rem2End.Play();
+        ef_rem2moya.Stop();
+
+        character_number = 0;
+        character_Spine_skel[0].state.SetAnimation(0, "run", true);
     }
 
     void ChangeMove()
@@ -250,14 +314,23 @@ public class CharacterControl : MonoBehaviour
                     character_number = 1;
                     character_Spine[0].SetActive(false);
                     character_Spine[1].SetActive(true);
+
+
+                    AttackCollision[0].enabled = false;
+                    AttackCollision[1].enabled = true;
+
                     character_Spine_skel[1].state.SetAnimation(0, "change", false);
                     character_Spine_skel[1].state.AddAnimation(0, "run", true, 0);
                 }
-                else
+                else if (character_number == 1)
                 {
                     character_number = 0;
                     character_Spine[1].SetActive(false);
                     character_Spine[0].SetActive(true);
+
+                    AttackCollision[1].enabled = false;
+                    AttackCollision[0].enabled = true;
+
                     character_Spine_skel[0].state.SetAnimation(0, "change", false);
                     character_Spine_skel[0].state.AddAnimation(0, "run", true, 0);
 
@@ -265,15 +338,10 @@ public class CharacterControl : MonoBehaviour
             }
 
         }
-        
+     }
 
 
-        
-
-    }
-
-    
-
+  
 
     void OnCollisionEnter2D(Collision2D collision)
     {
