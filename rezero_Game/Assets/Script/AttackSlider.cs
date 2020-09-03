@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class AttackSlider : MonoBehaviour
 {
-    [SerializeField] Image attack_slider_fill_Im;
+    [SerializeField] Image attack_slider_fill_Im = default;
     Color attack_slider_fill_defaultcolor;
     public Slider attack_slider;
     public GameMaster GameMaster;

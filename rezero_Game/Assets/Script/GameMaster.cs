@@ -26,6 +26,16 @@ public class GameMaster : MonoBehaviour
     
 
     int count_gamestart = 0;
+
+
+
+    public int _HP = 5;
+    public bool is_invincible = false;
+    public float invincible_time = 0.5f;
+
+    [SerializeField] CircleCollider2D Character_Image_collider = default;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,8 +63,13 @@ public class GameMaster : MonoBehaviour
 
             Timer();
         }
+
+
+
+        InvincibleTime();
         
-        
+
+
     }
 
     void CountDown()
@@ -88,6 +103,19 @@ public class GameMaster : MonoBehaviour
        
 
 
+    }
+
+    void InvincibleTime()
+    {
+        if(is_invincible == true)
+        {
+            Character_Image_collider.enabled = false;
+        }
+        else
+        {
+            Character_Image_collider.enabled = true;
+
+        }
     }
 
 

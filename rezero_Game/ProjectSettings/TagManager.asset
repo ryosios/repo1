@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - earth
+  - Enemy_Blue
+  - Enemy_Red
   layers:
   - Default
   - TransparentFX

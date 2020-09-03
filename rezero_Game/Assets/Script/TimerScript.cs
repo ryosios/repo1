@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 public class TimerScript : MonoBehaviour
 {
-    [SerializeField] GameMaster GameMasterSC;
+    [SerializeField] GameMaster GameMasterSC = default;
     TextMeshProUGUI textmeshpro;
 
     // Start is called before the first frame update
