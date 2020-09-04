@@ -10,8 +10,10 @@ public class GameMaster : MonoBehaviour
 {
     [SerializeField] BackGroundMaker BackGroundMaker = default;
     [SerializeField] CharacterControl CharacterControl = default;
-    [SerializeField] PlayableDirector StartCutinTimeline = default;
-    
+    [SerializeField] PlayableDirector FadeTimeline = default;
+    [SerializeField] PlayableAsset fade_1_timeline = default;
+    [SerializeField] PlayableAsset fade_2_timeline = default;
+
 
 
     //==========ゲームシーン関係==========
@@ -44,7 +46,8 @@ public class GameMaster : MonoBehaviour
     {
         BackGroundMaker.SetBackGround();
         CharacterControl.enabled = false;
-        StartCutinTimeline.Play();
+        FadeTimeline.playableAsset = fade_1_timeline;
+        FadeTimeline.Play();
         
     }
 
@@ -136,9 +139,13 @@ public class GameMaster : MonoBehaviour
     private IEnumerator MoveTitleScene()
     {
         yield return new WaitForSeconds(titlescene_move_count);
-        
-        //フェード開始予定　Timeline終了時に移動でもいいかも
-        UnityEngine.SceneManagement.SceneManager.LoadScene("TitleScene");
+
+        //フェード開始
+        FadeTimeline.playableAsset = fade_2_timeline;
+        FadeTimeline.Play();
+
+        yield return new WaitForSeconds(0.5f);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("stage_title");
     }
 
 }

@@ -169,7 +169,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: fb58a2501d34f3740b253713268dd197, type: 2}
-  m_InitialState: 0
+  m_InitialState: 1
   m_WrapMode: 0
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -6683,7 +6683,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 480, y: 41}
+  m_AnchoredPosition: {x: 501, y: 41}
   m_SizeDelta: {x: 118, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &881734487
@@ -13601,7 +13601,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -20, y: -64}
+  m_AnchoredPosition: {x: -37, y: -64}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1780310307
@@ -13862,7 +13862,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BackGroundMaker: {fileID: 1340270118}
   CharacterControl: {fileID: 2057624742}
-  StartCutinTimeline: {fileID: 106669995}
+  FadeTimeline: {fileID: 1947394322}
+  fade_1_timeline: {fileID: 11400000, guid: 120284004166ef34c909f6c4ed9487c0, type: 2}
+  fade_2_timeline: {fileID: 11400000, guid: ac44587a14334e84dabefd0a636f4e32, type: 2}
 --- !u!4 &1785583518
 Transform:
   m_ObjectHideFlags: 0
@@ -14269,8 +14271,8 @@ PlayableDirector:
   m_GameObject: {fileID: 1947394321}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 120284004166ef34c909f6c4ed9487c0, type: 2}
-  m_InitialState: 1
+  m_PlayableAsset: {fileID: 11400000, guid: ac44587a14334e84dabefd0a636f4e32, type: 2}
+  m_InitialState: 0
   m_WrapMode: 0
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -14278,6 +14280,10 @@ PlayableDirector:
   - key: {fileID: 114990375937559404, guid: 120284004166ef34c909f6c4ed9487c0, type: 2}
     value: {fileID: 1734323225}
   - key: {fileID: 114919238018135132, guid: 120284004166ef34c909f6c4ed9487c0, type: 2}
+    value: {fileID: 1734323230}
+  - key: {fileID: 114990375937559404, guid: ac44587a14334e84dabefd0a636f4e32, type: 2}
+    value: {fileID: 1734323225}
+  - key: {fileID: 114919238018135132, guid: ac44587a14334e84dabefd0a636f4e32, type: 2}
     value: {fileID: 1734323230}
   m_ExposedReferences:
     m_References: []
