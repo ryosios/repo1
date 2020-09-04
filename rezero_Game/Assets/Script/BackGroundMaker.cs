@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BackGroundMaker : MonoBehaviour
 {
-    [SerializeField] float background_speed = 20f;
+     float background_speed = 10f; //背景スピード
     [SerializeField] GameObject[] background_prefab = new GameObject[3];
-    public GameObject[] background_Clone = new GameObject[3];
+    public GameObject[] background_Clone { get; set; } = new GameObject[3];
     // Start is called before the first frame update
     void Start()
     {

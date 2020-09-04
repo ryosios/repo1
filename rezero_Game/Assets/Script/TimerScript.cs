@@ -5,12 +5,12 @@ using TMPro;
 public class TimerScript : MonoBehaviour
 {
     [SerializeField] GameMaster GameMasterSC = default;
-    TextMeshProUGUI textmeshpro;
+    [SerializeField] TextMeshProUGUI timer_textmeshpro;
 
     // Start is called before the first frame update
     void Start()
     {
-        textmeshpro = this.GetComponent<TextMeshProUGUI>();
+       
     }
 
     // Update is called once per frame
@@ -21,6 +21,6 @@ public class TimerScript : MonoBehaviour
 
     void TimerSet()
     {
-        textmeshpro.text = GameMasterSC.timer_time.ToString("F2");
+        timer_textmeshpro.text = GameMasterSC.timer_time.ToString("F2");
     }
 }

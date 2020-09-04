@@ -8,9 +8,9 @@ public class CharacterControl : MonoBehaviour
 {
 
 
-    [SerializeField] float character_speed =10f;
-    [SerializeField] float character_jump_speed =10000f;
-    [SerializeField] bool on_earth;//接地判定
+     float character_speed =8f;
+     float character_jump_speed =650f;
+     bool on_earth;//接地判定
     [SerializeField] Transform character_image_tf = default;
     [SerializeField] GameObject[] character_Spine = new GameObject[3] ;
     SkeletonAnimation[] character_Spine_skel = new SkeletonAnimation[3];
@@ -232,7 +232,7 @@ public class CharacterControl : MonoBehaviour
 
     void AttackMove()
     {
-        if (AttackSliderScript.is_attack_slider_full == true)
+        if (GameMasterSC.is_attack_slider_full == true)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {

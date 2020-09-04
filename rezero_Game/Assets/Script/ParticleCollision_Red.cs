@@ -5,6 +5,9 @@ using UnityEngine;
 public class ParticleCollision_Red : MonoBehaviour
 {
     [SerializeField] GameMaster GameMsterSC = default;
+
+    
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +17,7 @@ public class ParticleCollision_Red : MonoBehaviour
     // Update is called once per frame
     void OnParticleCollision(GameObject obj)
     {
-
+       
         switch (obj.name)
         {
 
@@ -25,10 +28,14 @@ public class ParticleCollision_Red : MonoBehaviour
 
             case "AttackCollision_ramu":
                 //スコア加算する
+                GameMsterSC.score_tortal_point += GameMsterSC.score_point;
                 break;
 
             case "AttackCollision_remu2":
                 //スコア加算する
+                GameMsterSC.score_tortal_point += GameMsterSC.score_point;
+
+
                 break;
 
             case "Character_Image":

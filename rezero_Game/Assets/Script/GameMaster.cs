@@ -11,17 +11,17 @@ public class GameMaster : MonoBehaviour
     public PlayableDirector StartCutinTimeline;
 
 
-    public bool is_game_playing = false;
-    public bool is_game_end = false;
+    public bool is_game_playing { get; set; } = false;
+    public bool is_game_end { get; set; } = false;
 
 
     public BackGroundMaker BackGroundMaker;
     public CharacterControl CharacterControl;
 
-    public float totalTime = 3;
+    float totalTime { get; set; } = 3;
     int seconds;
 
-    public float timer_time = 60;
+    public float timer_time { get; set; } = 60;//タイム
  
     
 
@@ -29,19 +29,24 @@ public class GameMaster : MonoBehaviour
 
 
 
-    public int _HP = 5;
-    public bool is_invincible = false;
-    public float invincible_time = 0.5f;
+    public int _HP { get; set; } = 5;//HP
+    public bool is_invincible { get; set; } = false;//無敵中
+    public float invincible_time { get; set; } = 0.5f;//無敵時間
 
-    public int character_number = 0;// レム０　ラム１ レム2
+    public int character_number { get; set; } = 0;// レム０　ラム１ レム2
 
-    public bool is_attack = false;//アタック判定
-    public bool is_special = false;//special判定１F
-    public bool during_special = false;//specialモーション中
+    public bool is_attack { get; set; } = false;//アタック判定
+    public bool is_special { get; set; } = false;//special判定１F
+    public bool during_special { get; set; } = false;//specialモーション中
 
-    public int special_count = 3;//specialうてる回数
+    public int special_count { get; set; } = 3;//specialうてる回数
 
     [SerializeField] CircleCollider2D Character_Image_collider = default;
+
+    public int score_tortal_point { get; set; } = 0;//スコアトータルポイント
+    public int score_point { get; set; } = 10;//弾一個10点
+
+    public bool is_attack_slider_full { get; set; } = false; //アタックスライダーフルフラグ
 
 
     // Start is called before the first frame update
@@ -56,6 +61,7 @@ public class GameMaster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+      
         CountDown();
 
         if (is_game_playing)
