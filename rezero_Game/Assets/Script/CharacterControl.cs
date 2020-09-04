@@ -23,7 +23,7 @@ public class CharacterControl : MonoBehaviour
     [SerializeField] ParticleSystem ef_backgroundDark = default;
 
     [SerializeField] GameMaster GameMasterSC = default;
-    [SerializeField] AttackSlider AttackSliderScript;
+    [SerializeField] AttackSlider AttackSliderScript = default;
     [SerializeField] CircleCollider2D Character_Image_collider = default;//キャラのコリジョン
 
     Vector3 character_speed_x;
