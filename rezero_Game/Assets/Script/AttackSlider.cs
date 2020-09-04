@@ -7,12 +7,14 @@ public class AttackSlider : MonoBehaviour
 {
     [SerializeField] Image attack_slider_fill_Im = default;
     [SerializeField] GameMaster GameMasterSC = default;
+    [SerializeField] Slider attack_slider = default;
+    [SerializeField] CharacterControl CharacterControl = default;
 
     Color attack_slider_fill_defaultcolor;
-    [SerializeField] Slider attack_slider;
-    
-   
-    float attack_slider_speed = 0.5f;
+
+
+    public bool is_attack_slider_full { get; set; } = false; //アタックスライダーフル時のフラグ
+    float attack_slider_speed = 0.5f;//アタックスライダーのたまる速さ
 
 
     
@@ -51,14 +53,14 @@ public class AttackSlider : MonoBehaviour
         {
             attack_slider.value = 1;
             
-            GameMasterSC. is_attack_slider_full = true;
+            is_attack_slider_full = true;
 
         }
 
-        if (GameMasterSC.is_attack == true)
+        if (CharacterControl. on_attack == true)
         {
             attack_slider.value = 0;
-            GameMasterSC.is_attack_slider_full = false;
+            is_attack_slider_full = false;
            
         }
        
@@ -66,7 +68,7 @@ public class AttackSlider : MonoBehaviour
 
     void SliderColorFull()
     {
-        if (GameMasterSC.is_attack_slider_full)
+        if (is_attack_slider_full)
         {
             attack_slider_fill_Im.color = new Color(1f, 1f, 1f);
         }

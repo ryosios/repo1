@@ -6,6 +6,7 @@ public class ParticleCollision_Blue : MonoBehaviour
 {
 
     [SerializeField] GameMaster GameMsterSC = default;
+    [SerializeField] CharacterControl CharacterControl = default;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +40,7 @@ public class ParticleCollision_Blue : MonoBehaviour
                 GameMsterSC._HP -= 1;
                
                 //無敵時間bool
-                GameMsterSC.is_invincible = true;
+                CharacterControl.is_invincible = true;
                 StartCoroutine("InvincibleTimer");
                 break;
 
@@ -50,11 +51,11 @@ public class ParticleCollision_Blue : MonoBehaviour
     }
     private IEnumerator InvincibleTimer()
     {
-        yield return new WaitForSeconds(GameMsterSC.invincible_time);
+        yield return new WaitForSeconds(CharacterControl.invincible_time);
 
-        if (!GameMsterSC.during_special)
+        if (!CharacterControl.during_special)
         {
-            GameMsterSC.is_invincible = false;
+            CharacterControl. is_invincible = false;
         }
     }
 }
