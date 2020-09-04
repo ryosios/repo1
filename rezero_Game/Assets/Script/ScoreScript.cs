@@ -7,7 +7,7 @@ public class ScoreScript : MonoBehaviour
 {
 
     [SerializeField] GameMaster GameMasterSC = default;
-    [SerializeField] TextMeshProUGUI score_textmeshpro;
+    [SerializeField] TextMeshProUGUI score_textmeshpro = default;
     // Start is called before the first frame update
     void Start()
     {

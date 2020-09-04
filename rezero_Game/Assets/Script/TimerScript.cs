@@ -5,7 +5,7 @@ using TMPro;
 public class TimerScript : MonoBehaviour
 {
     [SerializeField] GameMaster GameMasterSC = default;
-    [SerializeField] TextMeshProUGUI timer_textmeshpro;
+    [SerializeField] TextMeshProUGUI timer_textmeshpro = default;
 
     // Start is called before the first frame update
     void Start()

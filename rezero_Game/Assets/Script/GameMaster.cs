@@ -8,45 +8,35 @@ using UnityEngine.Playables;
 
 public class GameMaster : MonoBehaviour
 {
-    public PlayableDirector StartCutinTimeline;
-
-
-    public bool is_game_playing { get; set; } = false;
-    public bool is_game_end { get; set; } = false;
-
-
-    public BackGroundMaker BackGroundMaker;
-    public CharacterControl CharacterControl;
-
-    float totalTime { get; set; } = 3;
-    int seconds;
-
-    public float timer_time { get; set; } = 60;//タイム
- 
+    [SerializeField] BackGroundMaker BackGroundMaker = default;
+    [SerializeField] CharacterControl CharacterControl = default;
+    [SerializeField] PlayableDirector StartCutinTimeline = default;
     
 
-    int count_gamestart = 0;
+
+    //==========ゲームシーン関係==========
+    public bool is_game_playing { get; set; } = false; //ゲーム中判定
+    public bool is_game_end { get; set; } = false; //ゲーム終了中判定
+    public bool is_onetime_titlemove { get; set; } = false; //タイトル遷移メソッド１F判定
 
 
+    float totalTime { get; set; } = 3;//ゲーム開始時カウントダウン時間
+    int seconds;
+    bool is_onecall_gamestart = false;//ゲーム開始時1度だけ呼ぶ用
 
+    public float timer_time { get; set; } = 60;//ゲーム終了までの時間
+    float titlescene_move_count = 3f;//タイトルシーン遷移までの時間
+
+
+ 
+
+    //=====UI系=====
     public int _HP { get; set; } = 5;//HP
-    public bool is_invincible { get; set; } = false;//無敵中
-    public float invincible_time { get; set; } = 0.5f;//無敵時間
-
-    public int character_number { get; set; } = 0;// レム０　ラム１ レム2
-
-    public bool is_attack { get; set; } = false;//アタック判定
-    public bool is_special { get; set; } = false;//special判定１F
-    public bool during_special { get; set; } = false;//specialモーション中
-
-    public int special_count { get; set; } = 3;//specialうてる回数
-
-    [SerializeField] CircleCollider2D Character_Image_collider = default;
-
+    public int special_count { get; set; } = 3;//Bomb回数
     public int score_tortal_point { get; set; } = 0;//スコアトータルポイント
     public int score_point { get; set; } = 10;//弾一個10点
 
-    public bool is_attack_slider_full { get; set; } = false; //アタックスライダーフルフラグ
+    
 
 
     // Start is called before the first frame update
@@ -67,30 +57,33 @@ public class GameMaster : MonoBehaviour
         if (is_game_playing)
         {
             BackGroundMaker.BackGroundMove();
-            if(count_gamestart == 0)
+            if(is_onecall_gamestart == false)
             {
+                is_onecall_gamestart = true;
                 //ゲーム開始時一回だけ処理
                 CharacterControl.enabled = true;
 
-                count_gamestart = 1;
+                
             }
 
-            Timer();
+            Timer();//カウントダウン
         }
 
-
-        if (during_special)
-        {
-            invincibleTime_Special();
-        }
-        else
-        {
-            InvincibleTime();
-        }
 
         
-        
 
+       
+
+        if (is_game_end==true&&is_game_playing==true&&is_onetime_titlemove == false)
+        {
+            is_onetime_titlemove = true;
+
+
+            StartCoroutine("MoveTitleScene");
+        }
+
+       
+        HP_Watching();//HP監視　0になったらis_game_end false ゲーム終了
 
     }
 
@@ -127,32 +120,25 @@ public class GameMaster : MonoBehaviour
 
     }
 
-    void InvincibleTime()
-    {
-        if(is_invincible == true)
-        {
-            Character_Image_collider.enabled = false;
-        }
-        else
-        {
-            Character_Image_collider.enabled = true;
+  
 
+   
+        
+   void HP_Watching()
+    {
+        if (_HP <= 0)
+        {
+            is_game_end = true;
         }
+
     }
 
-    void invincibleTime_Special()
+    private IEnumerator MoveTitleScene()
     {
-        if (during_special)
-        {
-            Character_Image_collider.enabled = false;
-        }
-        else
-        {
-            Character_Image_collider.enabled = true;
-
-        }
+        yield return new WaitForSeconds(titlescene_move_count);
+        
+        //フェード開始予定　Timeline終了時に移動でもいいかも
+        UnityEngine.SceneManagement.SceneManager.LoadScene("TitleScene");
     }
-
-    
 
 }

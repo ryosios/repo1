@@ -24,6 +24,7 @@ public class CharacterControl : MonoBehaviour
 
     [SerializeField] GameMaster GameMasterSC = default;
     [SerializeField] AttackSlider AttackSliderScript;
+    [SerializeField] CircleCollider2D Character_Image_collider = default;//キャラのコリジョン
 
     Vector3 character_speed_x;
     Vector3 character_speed_y;
@@ -32,16 +33,17 @@ public class CharacterControl : MonoBehaviour
 
     int character_jump_counter = 0;
 
-    
-    
-   
+    public int character_number { get; set; } = 0;// レム０　ラム１ レム鬼化2
 
-   
+    public bool is_invincible { get; set; } = false;//被ダメ時無敵中判定
 
+    public float invincible_time { get; set; } = 0.5f;//被ダメ時無敵時間
 
-    
-    
+    public bool on_attack { get; set; } = false;//アタック開始時1フレ判定
 
+    public bool on_special { get; set; } = false;//special開始時１F判定
+
+    public bool during_special { get; set; } = false;//specialモーション中
 
     // Start is called before the first frame update
 
@@ -71,7 +73,7 @@ public class CharacterControl : MonoBehaviour
         
         character_speed_y = new Vector3(0, character_jump_speed, 0);
 
-        character_Spine_skel[GameMasterSC.character_number].state.SetAnimation(0, "run", true);
+        character_Spine_skel[character_number].state.SetAnimation(0, "run", true);
 
     }
 
@@ -88,21 +90,30 @@ public class CharacterControl : MonoBehaviour
         CharacterMoveLimit();
 
 
-        if (!GameMasterSC.during_special)
+        if (!during_special)
         {
             AttackMove();
         }
 
-        if (GameMasterSC.special_count > 0 && GameMasterSC.during_special == false)//カウント０以上、必殺技期間でないとき
+        if (GameMasterSC.special_count > 0 && during_special == false)//カウント０以上、必殺技期間でないとき
         {
             SpecialMove();
         }
 
-        if (!GameMasterSC.during_special)
+        if (!during_special)
         {
             ChangeMove();
         }
 
+
+        if (during_special)//スペシャル時の無敵と通常時の無敵
+        {
+            invincibleTime_Special();
+        }
+        else
+        {
+            InvincibleTime();
+        }
 
 
     }
@@ -118,11 +129,11 @@ public class CharacterControl : MonoBehaviour
             character_image_tf.localScale = new Vector3(1,1,1);
 
             //==========モーション============
-            if (!character_Spine_skel[GameMasterSC.character_number].AnimationName.Equals("run2")&& !character_Spine_skel[GameMasterSC.character_number].AnimationName.Equals("jump")
-                && !character_Spine_skel[GameMasterSC.character_number].AnimationName.Equals("attack") && !character_Spine_skel[GameMasterSC.character_number].AnimationName.Equals("change")
-                && !character_Spine_skel[GameMasterSC.character_number].AnimationName.Equals("special"))
+            if (!character_Spine_skel[character_number].AnimationName.Equals("run2")&& !character_Spine_skel[character_number].AnimationName.Equals("jump")
+                && !character_Spine_skel[character_number].AnimationName.Equals("attack") && !character_Spine_skel[character_number].AnimationName.Equals("change")
+                && !character_Spine_skel[character_number].AnimationName.Equals("special"))
             {
-                character_Spine_skel[GameMasterSC.character_number].state.SetAnimation(0, "run2", true);
+                character_Spine_skel[character_number].state.SetAnimation(0, "run2", true);
             }
 
         }
@@ -136,11 +147,11 @@ public class CharacterControl : MonoBehaviour
             character_image_tf.localScale = new Vector3(1, 1, 1);
 
             //==========モーション============
-            if (!character_Spine_skel[GameMasterSC.character_number].AnimationName.Equals("run") && !character_Spine_skel[GameMasterSC.character_number].AnimationName.Equals("jump") 
-                && !character_Spine_skel[GameMasterSC.character_number].AnimationName.Equals("attack")&& !character_Spine_skel[GameMasterSC.character_number].AnimationName.Equals("change")
-                && !character_Spine_skel[GameMasterSC.character_number].AnimationName.Equals("special"))
+            if (!character_Spine_skel[character_number].AnimationName.Equals("run") && !character_Spine_skel[character_number].AnimationName.Equals("jump") 
+                && !character_Spine_skel[character_number].AnimationName.Equals("attack")&& !character_Spine_skel[character_number].AnimationName.Equals("change")
+                && !character_Spine_skel[character_number].AnimationName.Equals("special"))
             {
-                character_Spine_skel[GameMasterSC.character_number].state.SetAnimation(0, "run", true);
+                character_Spine_skel[character_number].state.SetAnimation(0, "run", true);
             }
 
         }
@@ -160,11 +171,11 @@ public class CharacterControl : MonoBehaviour
                 character_jump_counter += 1;
 
                 //==========モーション============
-                if (!character_Spine_skel[GameMasterSC.character_number].AnimationName.Equals("special") && !character_Spine_skel[GameMasterSC.character_number].AnimationName.Equals("attack"))
+                if (!character_Spine_skel[character_number].AnimationName.Equals("special") && !character_Spine_skel[character_number].AnimationName.Equals("attack"))
                 {
-                    character_Spine_skel[GameMasterSC.character_number].state.SetAnimation(0, "jump", false);
+                    character_Spine_skel[character_number].state.SetAnimation(0, "jump", false);
                 }
-                character_Spine_skel[GameMasterSC.character_number].state.AddAnimation(0, "run", true,0);
+                character_Spine_skel[character_number].state.AddAnimation(0, "run", true,0);
 
             }
         }
@@ -179,11 +190,11 @@ public class CharacterControl : MonoBehaviour
 
 
                 //==========モーション============
-                if (!character_Spine_skel[GameMasterSC.character_number].AnimationName.Equals("special") && !character_Spine_skel[GameMasterSC.character_number].AnimationName.Equals("attack"))
+                if (!character_Spine_skel[character_number].AnimationName.Equals("special") && !character_Spine_skel[character_number].AnimationName.Equals("attack"))
                 {
-                    character_Spine_skel[GameMasterSC.character_number].state.SetAnimation(0, "down", false);
+                    character_Spine_skel[character_number].state.SetAnimation(0, "down", false);
                 }
-                character_Spine_skel[GameMasterSC.character_number].state.AddAnimation(0, "run", true, 0);
+                character_Spine_skel[character_number].state.AddAnimation(0, "run", true, 0);
             }
         }
 
@@ -202,9 +213,9 @@ public class CharacterControl : MonoBehaviour
 
                 //==========モーション============
                 // character_Spine.state.SetAnimation(0, "idle", true);
-                if (!character_Spine_skel[GameMasterSC.character_number].AnimationName.Equals("special") && !character_Spine_skel[GameMasterSC.character_number].AnimationName.Equals("attack"))
+                if (!character_Spine_skel[character_number].AnimationName.Equals("special") && !character_Spine_skel[character_number].AnimationName.Equals("attack"))
                 {
-                    character_Spine_skel[GameMasterSC.character_number].state.SetAnimation(0, "run", true);
+                    character_Spine_skel[character_number].state.SetAnimation(0, "run", true);
 
                 }
 
@@ -232,31 +243,33 @@ public class CharacterControl : MonoBehaviour
 
     void AttackMove()
     {
-        if (GameMasterSC.is_attack_slider_full == true)
+        if (AttackSliderScript.is_attack_slider_full == true)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                AttackCollision[GameMasterSC.character_number].enabled = true;
+                AttackCollision[character_number].enabled = true;
 
 
                 //==========モーション============
-
-                character_Spine_skel[GameMasterSC.character_number].state.SetAnimation(0, "attack", false).Complete += delegate
+                if (!character_Spine_skel[character_number].AnimationName.Equals("special"))
                 {
-                    AttackCollision[GameMasterSC.character_number].enabled = false;//当たり判定出てる時間はモーション依存
-                };
+                    character_Spine_skel[character_number].state.SetAnimation(0, "attack", false).Complete += delegate
+                    {
+                        AttackCollision[character_number].enabled = false;//当たり判定出てる時間はモーション依存
+                    };
 
-                character_Spine_skel[GameMasterSC.character_number].state.AddAnimation(0, "run", true, 0);
+                    character_Spine_skel[character_number].state.AddAnimation(0, "run", true, 0);
 
-                
+                }
+
 
                 //==========bool============
-                GameMasterSC.is_attack = true;
+                on_attack = true;
             }
         }
         else
         {
-            GameMasterSC.is_attack = false;
+            on_attack = false;
         }
 
     }
@@ -265,10 +278,10 @@ public class CharacterControl : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.D))
         {
-            if (GameMasterSC.character_number == 0 )
+            if (character_number == 0 )
             {
-                GameMasterSC.is_special = true;
-                GameMasterSC.during_special = true;
+                on_special = true;
+                during_special = true;
                 GameMasterSC.special_count -= 1;
 
                 ef_backgroundDark.Play();
@@ -276,7 +289,7 @@ public class CharacterControl : MonoBehaviour
 
                 character_Spine_skel[0].state.SetAnimation(0, "special", false).Complete += delegate {
                     //スペシャルモーション終わったら～
-                    GameMasterSC.character_number = 2;
+                    character_number = 2;
                     character_Spine[0].SetActive(false);//レムから鬼化レムにプレファブ交代
                     character_Spine[1].SetActive(false);
                     character_Spine[2].SetActive(true);
@@ -289,7 +302,7 @@ public class CharacterControl : MonoBehaviour
 
                     character_Spine_skel[2].state.SetAnimation(0, "run", true);
 
-                    GameMasterSC.during_special = false;
+                    during_special = false;
                     ef_rem2moya.Play();
 
                     StartCoroutine("remu2_finish");
@@ -297,24 +310,24 @@ public class CharacterControl : MonoBehaviour
 
             }
 
-            else if(GameMasterSC.character_number == 1)
+            else if(character_number == 1)
             {
-                GameMasterSC.is_special = true;
+                on_special = true;
                 GameMasterSC.special_count -= 1;
-                GameMasterSC.during_special = true;
+                during_special = true;
 
                 ef_backgroundDark.Play();
 
                 character_Spine_skel[1].state.SetAnimation(0, "special", false).Complete += delegate
                 {
-                    GameMasterSC.during_special = false;
+                    during_special = false;
                 };
                 character_Spine_skel[1].state.AddAnimation(0, "run", true,0);
             } 
         }
         else
         {
-            GameMasterSC.is_special = false;
+            on_special = false;
         }
 
     }
@@ -337,7 +350,7 @@ public class CharacterControl : MonoBehaviour
         ef_rem2End.Play();
         ef_rem2moya.Stop();
 
-        GameMasterSC.character_number = 0;
+        character_number = 0;
         character_Spine_skel[0].state.SetAnimation(0, "run", true);
     }
 
@@ -345,11 +358,11 @@ public class CharacterControl : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            if(GameMasterSC.character_number ==0 || GameMasterSC.character_number == 1)
+            if(character_number ==0 || character_number == 1)
             {
-                if (GameMasterSC.character_number == 0)
+                if (character_number == 0)
                 {
-                    GameMasterSC.character_number = 1;
+                    character_number = 1;
                     character_Spine[0].SetActive(false);
                     character_Spine[1].SetActive(true);
 
@@ -363,9 +376,9 @@ public class CharacterControl : MonoBehaviour
                     character_Spine_skel[1].state.SetAnimation(0, "change", false);
                     character_Spine_skel[1].state.AddAnimation(0, "run", true, 0);
                 }
-                else if (GameMasterSC.character_number == 1)
+                else if (character_number == 1)
                 {
-                    GameMasterSC.character_number = 0;
+                    character_number = 0;
                     character_Spine[1].SetActive(false);
                     character_Spine[0].SetActive(true);
 
@@ -385,17 +398,44 @@ public class CharacterControl : MonoBehaviour
      }
 
 
- 
+
+    void InvincibleTime()
+    {
+        if (is_invincible == true)
+        {
+            Character_Image_collider.enabled = false;
+        }
+        else
+        {
+            Character_Image_collider.enabled = true;
+
+        }
+    }
+
+    void invincibleTime_Special()
+    {
+        if (during_special)
+        {
+            Character_Image_collider.enabled = false;
+        }
+        else
+        {
+            Character_Image_collider.enabled = true;
+
+        }
+    }
+
+
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag.Equals("earth"))
         {
             character_jump_counter = 0; //ジャンプ回数初期化
-            if (!character_Spine_skel[GameMasterSC.character_number].AnimationName.Equals("idle"))//モーション初期化
+            if (!character_Spine_skel[character_number].AnimationName.Equals("idle"))//モーション初期化
             {
                 // character_Spine.state.SetAnimation(0, "idle", true);
-                character_Spine_skel[GameMasterSC.character_number].state.AddAnimation(0, "run", true,0);
+                character_Spine_skel[character_number].state.AddAnimation(0, "run", true,0);
               
             }
         }
