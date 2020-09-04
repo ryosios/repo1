@@ -9,13 +9,13 @@ public class AttackSlider : MonoBehaviour
     [SerializeField] GameMaster GameMasterSC = default;
 
     Color attack_slider_fill_defaultcolor;
-    public Slider attack_slider;
+    [SerializeField] Slider attack_slider;
     
    
     float attack_slider_speed = 0.5f;
 
 
-    public bool is_attack_slider_full = false;
+    
 
    
 
@@ -51,14 +51,14 @@ public class AttackSlider : MonoBehaviour
         {
             attack_slider.value = 1;
             
-            is_attack_slider_full = true;
+            GameMasterSC. is_attack_slider_full = true;
 
         }
 
         if (GameMasterSC.is_attack == true)
         {
             attack_slider.value = 0;
-            is_attack_slider_full = false;
+            GameMasterSC.is_attack_slider_full = false;
            
         }
        
@@ -66,7 +66,7 @@ public class AttackSlider : MonoBehaviour
 
     void SliderColorFull()
     {
-        if (is_attack_slider_full)
+        if (GameMasterSC.is_attack_slider_full)
         {
             attack_slider_fill_Im.color = new Color(1f, 1f, 1f);
         }

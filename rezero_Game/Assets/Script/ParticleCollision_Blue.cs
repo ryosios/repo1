@@ -20,7 +20,9 @@ public class ParticleCollision_Blue : MonoBehaviour
         {
           
             case "AttackCollision_remu":
-               //スコア加算
+                //スコア加算
+               
+                GameMsterSC.score_tortal_point += GameMsterSC.score_point;
                 break;
            
             case "AttackCollision_ramu":
@@ -28,7 +30,8 @@ public class ParticleCollision_Blue : MonoBehaviour
                 break;
            
             case "AttackCollision_remu2":
-               //スコア加算する
+                //スコア加算する
+                GameMsterSC.score_tortal_point += GameMsterSC.score_point;
                 break;
 
             case "Character_Image":
