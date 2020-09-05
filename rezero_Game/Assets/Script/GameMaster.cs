@@ -17,6 +17,9 @@ public class GameMaster : MonoBehaviour
    
     [SerializeField] GameObject[] Boss_Timeline = new GameObject [3];
     List<PlayableDirector> Boss_Timeline_PD = new List<PlayableDirector>();
+
+    
+    [SerializeField] GameObject Character_Image;
     
 
 
@@ -43,6 +46,7 @@ public class GameMaster : MonoBehaviour
 
 
     //=====UI系=====
+    int _HP_before;
     public int _HP { get; set; } = 5;//HP
     public int special_count { get; set; } = 3;//Bomb回数
     public int score_tortal_point { get; set; } = 0;//スコアトータルポイント
@@ -63,12 +67,14 @@ public class GameMaster : MonoBehaviour
         CharacterControl.enabled = false;
         FadeTimeline.playableAsset = fade_1_timeline;
         FadeTimeline.Play();
-        
+
+        _HP_before = _HP;
     }
 
     // Update is called once per frame
     void Update()
     {
+        
       
         CountDown();
 
@@ -88,6 +94,12 @@ public class GameMaster : MonoBehaviour
             
             BossRecastTimer();
 
+            if(_HP_before - _HP == 1)
+            {
+                _HP_before = _HP;
+                StartCoroutine("InvincibleTime");
+            }
+                
         }
 
 
@@ -175,7 +187,7 @@ public class GameMaster : MonoBehaviour
             boss_recast_time += Time.deltaTime;
             if (boss_recast_time >= boss_recast_tortal_time)
             {
-                Debug.Log("koko3");
+               
                 is_boss_playing = true;
                 boss_recast_time = 0;
 
@@ -190,4 +202,20 @@ public class GameMaster : MonoBehaviour
         boss_timeline_number = UnityEngine.Random.RandomRange(0, Boss_Timeline.Length);//ボスの配列で0～3ランダム選択
         Instantiate(Boss_Timeline[boss_timeline_number]);//ボスのTimelineゲームオブジェクトを選択したナンバーでインスタンス化
     }
+
+
+    private IEnumerator InvincibleTime()
+    {
+            
+            Character_Image.layer = 16;
+
+        yield return new WaitForSeconds(1.0f);
+           
+            Character_Image.layer = 10;
+        
+    }
+
+   
+
+
 }
