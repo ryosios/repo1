@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
-
+using System.Collections.Generic;
 
 
 
@@ -13,6 +13,11 @@ public class GameMaster : MonoBehaviour
     [SerializeField] PlayableDirector FadeTimeline = default;
     [SerializeField] PlayableAsset fade_1_timeline = default;
     [SerializeField] PlayableAsset fade_2_timeline = default;
+
+   
+    [SerializeField] GameObject[] Boss_Timeline = new GameObject [3];
+    List<PlayableDirector> Boss_Timeline_PD = new List<PlayableDirector>();
+    
 
 
 
@@ -29,8 +34,13 @@ public class GameMaster : MonoBehaviour
     public float timer_time { get; set; } = 60;//ゲーム終了までの時間
     float titlescene_move_count = 3f;//タイトルシーン遷移までの時間
 
+    float boss_recast_tortal_time = 5f;//ボスの出現間隔
+    float boss_recast_time = 0;
+    public bool is_boss_playing { get; set; } = false;//ボス戦闘中判定
+    int boss_timeline_number = 0;//どのボスのタイムラインを選択するか
 
- 
+
+
 
     //=====UI系=====
     public int _HP { get; set; } = 5;//HP
@@ -44,6 +54,11 @@ public class GameMaster : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        for (int i = 0; i < Boss_Timeline.Length; i++)
+        {
+            var PDobj = Boss_Timeline[i].GetComponent<PlayableDirector>();
+            Boss_Timeline_PD.Add(PDobj);
+        }
         BackGroundMaker.SetBackGround();
         CharacterControl.enabled = false;
         FadeTimeline.playableAsset = fade_1_timeline;
@@ -70,6 +85,9 @@ public class GameMaster : MonoBehaviour
             }
 
             Timer();//カウントダウン
+            
+            BossRecastTimer();
+
         }
 
 
@@ -148,4 +166,28 @@ public class GameMaster : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene("stage_title");
     }
 
+    void BossRecastTimer()
+    {//ボス戦闘中でない場合にタイマー進める
+        if (!is_boss_playing)
+        {
+            
+
+            boss_recast_time += Time.deltaTime;
+            if (boss_recast_time >= boss_recast_tortal_time)
+            {
+                Debug.Log("koko3");
+                is_boss_playing = true;
+                boss_recast_time = 0;
+
+                BossSet();
+
+            }
+        }
+    }
+
+    void BossSet()
+    {
+        boss_timeline_number = UnityEngine.Random.RandomRange(0, Boss_Timeline.Length);//ボスの配列で0～3ランダム選択
+        Instantiate(Boss_Timeline[boss_timeline_number]);//ボスのTimelineゲームオブジェクトを選択したナンバーでインスタンス化
+    }
 }

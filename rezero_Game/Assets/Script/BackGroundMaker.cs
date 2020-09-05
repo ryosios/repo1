@@ -8,7 +8,7 @@ public class BackGroundMaker : MonoBehaviour
     public GameObject[] background_Clone { get; set; } = new GameObject[3];
 
 
-    float background_speed = 10f; //背景スピード
+    int background_speed = 10; //背景スピード
     
    
     // Start is called before the first frame update
@@ -29,7 +29,7 @@ public class BackGroundMaker : MonoBehaviour
         {
 
             background_Clone[i] = Instantiate(background_prefab[i],  this.transform) as GameObject;
-            background_Clone[i].transform.localPosition = new Vector3(-15.5f + i * 15.5f, 0, 0);
+            background_Clone[i].transform.localPosition = new Vector3(-15 + i * 15, 0, 0);
 
         }
     }
@@ -42,9 +42,9 @@ public class BackGroundMaker : MonoBehaviour
             this_position.x -= background_speed*Time.deltaTime;
             background.transform.localPosition = this_position;
 
-            if (background.transform.localPosition.x < -31f)
+            if (background.transform.localPosition.x < -30)
             {
-                background.transform.localPosition = new Vector3(15.5f, 0, 0);
+                background.transform.localPosition = new Vector3(15, 0, 0);
             }
           //  Debug.Log("koko2");
         }

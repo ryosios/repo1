@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2692381642116990025}
   m_Layer: 15
   m_Name: Enemy_Red
-  m_TagString: Enemy_Blue
+  m_TagString: Enemy_Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4713,6 +4713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameMsterSC: {fileID: 0}
+  CharacterControl: {fileID: 0}
 --- !u!1 &3932937636235221211
 GameObject:
   m_ObjectHideFlags: 0

@@ -3702,11 +3702,11 @@ ParticleSystem:
     radiusScale: 1
   SubModule:
     serializedVersion: 2
-    enabled: 0
+    enabled: 1
     subEmitters:
     - serializedVersion: 3
-      emitter: {fileID: 0}
-      type: 0
+      emitter: {fileID: 3582164881028218312}
+      type: 2
       properties: 0
       emitProbability: 1
   LightsModule:
@@ -4713,6 +4713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameMsterSC: {fileID: 0}
+  CharacterControl: {fileID: 0}
 --- !u!1 &7797387703682629475
 GameObject:
   m_ObjectHideFlags: 0
