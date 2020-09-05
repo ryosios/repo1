@@ -3677,7 +3677,7 @@ ParticleSystem:
         m_RotationOrder: 4
     minKillSpeed: 0
     maxKillSpeed: 10000
-    radiusScale: 1
+    radiusScale: 0.5
     collidesWith:
       serializedVersion: 2
       m_Bits: 13312
@@ -4712,8 +4712,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80d03250b8610049827476c03d0798f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameMsterSC: {fileID: 0}
-  CharacterControl: {fileID: 0}
 --- !u!1 &3932937636235221211
 GameObject:
   m_ObjectHideFlags: 0

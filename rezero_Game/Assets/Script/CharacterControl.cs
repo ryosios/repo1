@@ -8,8 +8,8 @@ public class CharacterControl : MonoBehaviour
 {
 
 
-     float character_speed =8f;
-     float character_jump_speed =650f;
+     float character_speed =3.5f;
+     float character_jump_speed =380f;
      bool on_earth;//接地判定
     [SerializeField] Transform character_image_tf = default;
     [SerializeField] GameObject[] character_Spine = new GameObject[3] ;
@@ -29,6 +29,8 @@ public class CharacterControl : MonoBehaviour
 
     Vector3 character_speed_x;
     Vector3 character_speed_y;
+   
+
 
     Rigidbody2D character_rigid2D;
 
@@ -73,6 +75,8 @@ public class CharacterControl : MonoBehaviour
         character_rigid2D = GetComponent<Rigidbody2D>();
         
         character_speed_y = new Vector3(0, character_jump_speed, 0);
+        
+
 
         character_Spine_skel[character_number].state.SetAnimation(0, "run", true);
 
@@ -116,40 +120,53 @@ public class CharacterControl : MonoBehaviour
     void HorizontalMove()
     {
 
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            //==========移動============
-            character_speed_x = new Vector3(character_speed, character_rigid2D.velocity.y, 0);
-            character_rigid2D.velocity = character_speed_x;
-            character_image_tf.localScale = new Vector3(1,1,1);
+       
 
-            //==========モーション============
-            if (!character_Spine_skel[character_number].AnimationName.Equals("run2")&& !character_Spine_skel[character_number].AnimationName.Equals("jump")
-                && !character_Spine_skel[character_number].AnimationName.Equals("attack") && !character_Spine_skel[character_number].AnimationName.Equals("change")
-                && !character_Spine_skel[character_number].AnimationName.Equals("special"))
-            {
-                character_Spine_skel[character_number].state.SetAnimation(0, "run2", true);
-            }
 
-        }
-        else if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            //==========移動============
-            character_speed_x = new Vector3(-character_speed, character_rigid2D.velocity.y, 0);
-            character_rigid2D.velocity = character_speed_x;
 
-            // character_image_tf.localScale = new Vector3(-1, 1, 1);
-            character_image_tf.localScale = new Vector3(1, 1, 1);
 
-            //==========モーション============
-            if (!character_Spine_skel[character_number].AnimationName.Equals("run") && !character_Spine_skel[character_number].AnimationName.Equals("jump") 
-                && !character_Spine_skel[character_number].AnimationName.Equals("attack")&& !character_Spine_skel[character_number].AnimationName.Equals("change")
-                && !character_Spine_skel[character_number].AnimationName.Equals("special"))
-            {
-                character_Spine_skel[character_number].state.SetAnimation(0, "run", true);
-            }
 
-        }
+          if (Input.GetKey(KeyCode.RightArrow))
+           {
+               //==========移動============
+               character_speed_x = new Vector3(character_speed, character_rigid2D.velocity.y, 0);
+               character_rigid2D.velocity = character_speed_x;
+               character_image_tf.localScale = new Vector3(1,1,1);
+
+               //==========モーション============
+               if (!character_Spine_skel[character_number].AnimationName.Equals("run2")&& !character_Spine_skel[character_number].AnimationName.Equals("jump")
+                   && !character_Spine_skel[character_number].AnimationName.Equals("attack") && !character_Spine_skel[character_number].AnimationName.Equals("change")
+                   && !character_Spine_skel[character_number].AnimationName.Equals("special"))
+               {
+                   character_Spine_skel[character_number].state.SetAnimation(0, "run2", true);
+               }
+
+           }
+           else if (Input.GetKey(KeyCode.LeftArrow))
+           {
+               //==========移動============
+               character_speed_x = new Vector3(-character_speed, character_rigid2D.velocity.y, 0);
+               character_rigid2D.velocity = character_speed_x;
+
+               // character_image_tf.localScale = new Vector3(-1, 1, 1);
+               character_image_tf.localScale = new Vector3(1, 1, 1);
+
+               //==========モーション============
+               if (!character_Spine_skel[character_number].AnimationName.Equals("run") && !character_Spine_skel[character_number].AnimationName.Equals("jump") 
+                   && !character_Spine_skel[character_number].AnimationName.Equals("attack")&& !character_Spine_skel[character_number].AnimationName.Equals("change")
+                   && !character_Spine_skel[character_number].AnimationName.Equals("special"))
+               {
+                   character_Spine_skel[character_number].state.SetAnimation(0, "run", true);
+               }
+
+           }
+          
+
+
+
+
+
+
     }
 
     void VerticalMove()

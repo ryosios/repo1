@@ -24,7 +24,6 @@ MonoBehaviour:
   - jump
   - run
   - down
-  - down
   - attack
   - down
   - attack
@@ -39,7 +38,6 @@ MonoBehaviour:
   - run
   - down
   - down
-  - run
   - jump
   - change
   - jump
@@ -50,7 +48,6 @@ MonoBehaviour:
   - change
   - change
   duration:
-  - 0
   - 0
   - 0
   - 0
