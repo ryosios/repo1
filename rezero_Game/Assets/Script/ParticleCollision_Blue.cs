@@ -5,12 +5,13 @@ using UnityEngine;
 public class ParticleCollision_Blue : MonoBehaviour
 {
 
-    [SerializeField] GameMaster GameMsterSC = default;
-    [SerializeField] CharacterControl CharacterControl = default;
+    GameMaster GameMsterSC;
+    CharacterControl CharacterControlSC;
     // Start is called before the first frame update
     void Start()
     {
-        
+        CharacterControlSC = GameObject.Find("Character_locator").GetComponent<CharacterControl>();
+        GameMsterSC = GameObject.Find("GameMasterObject").GetComponent<GameMaster>();
     }
 
     // Update is called once per frame
@@ -40,7 +41,7 @@ public class ParticleCollision_Blue : MonoBehaviour
                 GameMsterSC._HP -= 1;
                
                 //無敵時間bool
-                CharacterControl.is_invincible = true;
+                CharacterControlSC.is_invincible = true;
                 StartCoroutine("InvincibleTimer");
                 break;
 
@@ -51,11 +52,11 @@ public class ParticleCollision_Blue : MonoBehaviour
     }
     private IEnumerator InvincibleTimer()
     {
-        yield return new WaitForSeconds(CharacterControl.invincible_time);
+        yield return new WaitForSeconds(CharacterControlSC.invincible_time);
 
-        if (!CharacterControl.during_special)
+        if (!CharacterControlSC.during_special)
         {
-            CharacterControl. is_invincible = false;
+            CharacterControlSC. is_invincible = false;
         }
     }
 }

@@ -316,6 +316,8 @@ public class CharacterControl : MonoBehaviour
                 GameMasterSC.special_count -= 1;
                 during_special = true;
 
+                GameMasterSC.timer_time += 10;
+
                 ef_backgroundDark.Play();
 
                 character_Spine_skel[1].state.SetAnimation(0, "special", false).Complete += delegate
