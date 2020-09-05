@@ -24,7 +24,7 @@ public class CharacterControl : MonoBehaviour
 
     [SerializeField] GameMaster GameMasterSC = default;
     [SerializeField] AttackSlider AttackSliderScript = default;
-    [SerializeField] GameObject Character_Image = default;
+   // [SerializeField] GameObject Character_Image = default;
     [SerializeField] CircleCollider2D Character_Image_collider = default;//キャラのコリジョン
 
     Vector3 character_speed_x;
@@ -36,7 +36,7 @@ public class CharacterControl : MonoBehaviour
 
     public int character_number { get; set; } = 0;// レム０　ラム１ レム鬼化2
 
-    public bool is_invincible { get; set; } = false;//被ダメ時無敵中判定
+  //  public bool is_invincible { get; set; } = false;//被ダメ時無敵中判定
 
     public float invincible_time { get; set; } = 0.5f;//被ダメ時無敵時間
 

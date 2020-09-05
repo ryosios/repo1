@@ -42,6 +42,7 @@ public class GameMaster : MonoBehaviour
     public bool is_boss_playing { get; set; } = false;//ボス戦闘中判定
     int boss_timeline_number = 0;//どのボスのタイムラインを選択するか
 
+    float invincible_time = 1f;//被ダメ時無敵時間
 
 
 
@@ -94,7 +95,7 @@ public class GameMaster : MonoBehaviour
             
             BossRecastTimer();
 
-            if(_HP_before - _HP == 1)
+            if(_HP_before - _HP == 1)//被ダメ時無敵処理
             {
                 _HP_before = _HP;
                 StartCoroutine("InvincibleTime");
@@ -199,7 +200,7 @@ public class GameMaster : MonoBehaviour
 
     void BossSet()
     {
-        boss_timeline_number = UnityEngine.Random.RandomRange(0, Boss_Timeline.Length);//ボスの配列で0～3ランダム選択
+        boss_timeline_number = UnityEngine.Random.Range(0, Boss_Timeline.Length);//ボスの配列で0～3ランダム選択
         Instantiate(Boss_Timeline[boss_timeline_number]);//ボスのTimelineゲームオブジェクトを選択したナンバーでインスタンス化
     }
 
@@ -209,7 +210,7 @@ public class GameMaster : MonoBehaviour
             
             Character_Image.layer = 16;
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(invincible_time);
            
             Character_Image.layer = 10;
         
