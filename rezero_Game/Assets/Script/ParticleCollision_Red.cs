@@ -42,11 +42,11 @@ public class ParticleCollision_Red : MonoBehaviour
 
             case "Character_Image":
                 //ダメージ
+                Debug.Log("nazo");
                 GameMsterSC._HP -= 1;
 
-                //無敵時間bool
-                CharacterControlSC.is_invincible = true;
-                StartCoroutine("InvincibleTimer");
+                
+               
                 break;
 
             default:
@@ -54,16 +54,5 @@ public class ParticleCollision_Red : MonoBehaviour
                 break;
         }
     }
-    private IEnumerator InvincibleTimer()
-    {
-        yield return new WaitForSeconds(CharacterControlSC.invincible_time);
-        //ここ注意
-        //必殺技使用中はfalseにしない。必殺技のほうでfalseにする
-        if(!CharacterControlSC.during_special)
-        {
-            CharacterControlSC.is_invincible = false;
-
-        }
-
-    }
+    
 }

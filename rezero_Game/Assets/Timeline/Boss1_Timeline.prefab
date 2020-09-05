@@ -181,10 +181,10 @@ PlayableDirector:
     value: {fileID: 806758516504847764}
   - key: {fileID: 114118858554100628, guid: fa338061b9b3b8e4fb1f695523390af0, type: 2}
     value: {fileID: 0}
-  - key: {fileID: 114229412114457716, guid: fa338061b9b3b8e4fb1f695523390af0, type: 2}
-    value: {fileID: 0}
   - key: {fileID: 114644182717545230, guid: fa338061b9b3b8e4fb1f695523390af0, type: 2}
     value: {fileID: 506257195}
+  - key: {fileID: 114069379391006252, guid: fa338061b9b3b8e4fb1f695523390af0, type: 2}
+    value: {fileID: 2692381641845288155}
   m_ExposedReferences:
     m_References:
     - 89491b6a20a5cde40a46e4082fb212d5: {fileID: 1572628162}
@@ -742,6 +742,31 @@ PrefabInstance:
       propertyPath: EmissionModule.m_Bursts.Array.data[2].probability
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2692381642116990027, guid: 381f8ad8b4b52cc42891e17642c1198a,
+        type: 3}
+      propertyPath: CollisionModule.m_Bounce.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2692381642116990027, guid: 381f8ad8b4b52cc42891e17642c1198a,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2692381642116990027, guid: 381f8ad8b4b52cc42891e17642c1198a,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2692381642116990027, guid: 381f8ad8b4b52cc42891e17642c1198a,
+        type: 3}
+      propertyPath: CollisionModule.multiplyColliderForceByParticleSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2692381642116990027, guid: 381f8ad8b4b52cc42891e17642c1198a,
+        type: 3}
+      propertyPath: CollisionModule.multiplyColliderForceByCollisionAngle
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5333849144737709138, guid: 381f8ad8b4b52cc42891e17642c1198a,
         type: 3}
       propertyPath: autoRandomSeed
@@ -751,6 +776,11 @@ PrefabInstance:
         type: 3}
       propertyPath: randomSeed
       value: 6771
+      objectReference: {fileID: 0}
+    - target: {fileID: 5333849144737709138, guid: 381f8ad8b4b52cc42891e17642c1198a,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 381f8ad8b4b52cc42891e17642c1198a, type: 3}

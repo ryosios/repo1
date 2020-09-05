@@ -40,9 +40,7 @@ public class ParticleCollision_Blue : MonoBehaviour
                 //ダメージ
                 GameMsterSC._HP -= 1;
                
-                //無敵時間bool
-                CharacterControlSC.is_invincible = true;
-                StartCoroutine("InvincibleTimer");
+               
                 break;
 
             default:
@@ -50,13 +48,5 @@ public class ParticleCollision_Blue : MonoBehaviour
                 break;
         }
     }
-    private IEnumerator InvincibleTimer()
-    {
-        yield return new WaitForSeconds(CharacterControlSC.invincible_time);
-
-        if (!CharacterControlSC.during_special)
-        {
-            CharacterControlSC. is_invincible = false;
-        }
-    }
+   
 }

@@ -24,6 +24,7 @@ public class CharacterControl : MonoBehaviour
 
     [SerializeField] GameMaster GameMasterSC = default;
     [SerializeField] AttackSlider AttackSliderScript = default;
+    [SerializeField] GameObject Character_Image = default;
     [SerializeField] CircleCollider2D Character_Image_collider = default;//キャラのコリジョン
 
     Vector3 character_speed_x;
@@ -105,15 +106,9 @@ public class CharacterControl : MonoBehaviour
             ChangeMove();
         }
 
+        invincibleTime_Special();
 
-        if (during_special)//スペシャル時の無敵と通常時の無敵
-        {
-            invincibleTime_Special();
-        }
-        else
-        {
-            InvincibleTime();
-        }
+
 
 
     }
@@ -341,13 +336,15 @@ public class CharacterControl : MonoBehaviour
         character_Spine[1].SetActive(false);
         character_Spine[2].SetActive(false);
 
-        AttackCollision[0].enabled = false;
-        AttackCollision[1].enabled = false;
-        AttackCollision[2].enabled = false;
+        
 
         AttackObject[0].SetActive(true);
         AttackObject[1].SetActive(false);
         AttackObject[2].SetActive(false);
+
+        AttackCollision[0].enabled = true;
+        AttackCollision[1].enabled = false;
+        AttackCollision[2].enabled = false;
 
         ef_rem2End.Play();
         ef_rem2moya.Stop();
@@ -401,24 +398,12 @@ public class CharacterControl : MonoBehaviour
 
 
 
-    void InvincibleTime()
-    {
-        if (is_invincible == true)
-        {
-            Character_Image_collider.enabled = false;
-        }
-        else
-        {
-            Character_Image_collider.enabled = true;
-
-        }
-    }
-
     void invincibleTime_Special()
     {
         if (during_special)
         {
             Character_Image_collider.enabled = false;
+
         }
         else
         {
