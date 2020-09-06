@@ -260,6 +260,7 @@ public class CharacterControl : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 AttackCollision[character_number].enabled = true;
+                StartCoroutine("AttackCollision_OFF");
 
 
                 //==========モーション============
@@ -267,7 +268,9 @@ public class CharacterControl : MonoBehaviour
                 {
                     character_Spine_skel[character_number].state.SetAnimation(0, "attack", false).Complete += delegate
                     {
-                        AttackCollision[character_number].enabled = false;//当たり判定出てる時間はモーション依存
+                        //ここはコルーチンでモーションとはわける！
+                        // AttackCollision[character_number].enabled = false;//当たり判定出てる時間はモーション依存
+                        Debug.Log("Attack終了");
                     };
 
                     character_Spine_skel[character_number].state.AddAnimation(0, "run", true, 0);
@@ -285,6 +288,13 @@ public class CharacterControl : MonoBehaviour
         }
 
     }
+
+    private IEnumerator AttackCollision_OFF()
+    {
+        yield return new WaitForSeconds(0.5f);//アタックコリジョンの判定0.5秒
+        AttackCollision[character_number].enabled = false;
+    }
+
 
     void SpecialMove()
     {

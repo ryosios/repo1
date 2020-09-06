@@ -8,7 +8,7 @@ public class BackGroundMaker : MonoBehaviour
     public GameObject[] background_Clone { get; set; } = new GameObject[3];
 
 
-    int background_speed = 10; //背景スピード
+    int background_speed = 7; //背景スピード
     
    
     // Start is called before the first frame update
