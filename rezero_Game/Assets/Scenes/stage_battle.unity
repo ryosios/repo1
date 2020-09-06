@@ -5349,7 +5349,7 @@ GameObject:
   - component: {fileID: 463388024}
   - component: {fileID: 463388026}
   - component: {fileID: 463388027}
-  m_Layer: 12
+  m_Layer: 18
   m_Name: AttackCollision_remu2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5933,7 +5933,7 @@ GameObject:
   - component: {fileID: 561195516}
   - component: {fileID: 561195517}
   - component: {fileID: 561195518}
-  m_Layer: 12
+  m_Layer: 17
   m_Name: AttackCollision_ramu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6825,7 +6825,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &931430997
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15022,6 +15022,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy_Black
+      objectReference: {fileID: 0}
+    - target: {fileID: 3174686600853463947, guid: 7510942d7176bbb498829b4765b034b7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7510942d7176bbb498829b4765b034b7, type: 3}
