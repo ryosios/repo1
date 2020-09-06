@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1b3b4b945939a54ea0b23d3396115fb, type: 3}
+  m_Name: remu_character_SkeletonData
+  m_EditorClassIdentifier: 
+  atlasAssets:
+  - {fileID: 11400000, guid: b865ab3015b888c489556598452def45, type: 2}
+  scale: 0.01
+  skeletonJSON: {fileID: 4900000, guid: 8f36c841c93e6a14eba87419bfef7192, type: 3}
+  skeletonDataModifiers: []
+  fromAnimation:
+  - run
+  - idle
+  - idle
+  - jump
+  - run
+  - down
+  - attack
+  - down
+  - jump
+  - idle
+  - run
+  - run2
+  toAnimation:
+  - jump
+  - jump
+  - run
+  - down
+  - down
+  - jump
+  - change
+  - change
+  - change
+  - change
+  - change
+  - change
+  duration:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  defaultMix: 0.1
+  controller: {fileID: 0}
