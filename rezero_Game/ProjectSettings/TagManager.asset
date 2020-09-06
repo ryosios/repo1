@@ -20,13 +20,13 @@ TagManager:
   - BackGround
   - CharacterHitCollision
   - CharacterHootCollision
-  - CharacterAttackCollision
+  - CharacterAttackCollision_Rem
   - CharacterSpecialCollision
   - Earth
   - EnemyCollision
   - CharacterInvincibleCollision
-  - 
-  - 
+  - CharacterAttackCollision_Ram
+  - CharacterAttackCollision_Ram2
   - 
   - 
   - 
