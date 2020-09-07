@@ -1,0 +1,69 @@
+
+subaru.png
+size: 2048,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+body
+  rotate: false
+  xy: 899, 105
+  size: 90, 147
+  orig: 90, 147
+  offset: 0, 0
+  index: -1
+hand_L
+  rotate: true
+  xy: 899, 51
+  size: 52, 141
+  orig: 52, 141
+  offset: 0, 0
+  index: -1
+hand_R
+  rotate: true
+  xy: 830, 5
+  size: 34, 140
+  orig: 34, 140
+  offset: 0, 0
+  index: -1
+head_b
+  rotate: true
+  xy: 465, 6
+  size: 246, 231
+  orig: 246, 231
+  offset: 0, 0
+  index: -1
+head_f
+  rotate: true
+  xy: 698, 41
+  size: 211, 199
+  orig: 211, 199
+  offset: 0, 0
+  index: -1
+leg_L
+  rotate: true
+  xy: 972, 6
+  size: 43, 133
+  orig: 43, 133
+  offset: 0, 0
+  index: -1
+leg_R
+  rotate: true
+  xy: 698, 2
+  size: 37, 130
+  orig: 37, 130
+  offset: 0, 0
+  index: -1
+neck
+  rotate: false
+  xy: 991, 210
+  size: 26, 42
+  orig: 26, 42
+  offset: 0, 0
+  index: -1
+すばるくん
+  rotate: true
+  xy: 2, 6
+  size: 246, 461
+  orig: 252, 464
+  offset: 3, 2
+  index: -1
