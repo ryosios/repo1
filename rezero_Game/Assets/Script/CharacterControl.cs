@@ -27,6 +27,8 @@ public class CharacterControl : MonoBehaviour
    // [SerializeField] GameObject Character_Image = default;
     [SerializeField] CircleCollider2D Character_Image_collider = default;//キャラのコリジョン
 
+    [SerializeField] GameObject CharacterShadow = default;
+
     Vector3 character_speed_x;
     Vector3 character_speed_y;
    
@@ -93,6 +95,8 @@ public class CharacterControl : MonoBehaviour
         StopMove();
 
         CharacterMoveLimit();
+
+        CharacterShadowSet();
 
 
         if (!during_special)
@@ -437,6 +441,14 @@ public class CharacterControl : MonoBehaviour
             Character_Image_collider.enabled = true;
 
         }
+    }
+
+    void CharacterShadowSet()
+    {
+        Vector2 chara_locator_pos = this.transform.position;
+        Vector2 chara_shadow_pos = CharacterShadow.transform.position;
+        chara_shadow_pos.x = chara_locator_pos.x;
+        CharacterShadow.transform.position = chara_shadow_pos;
     }
 
 

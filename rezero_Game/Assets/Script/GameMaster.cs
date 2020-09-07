@@ -35,7 +35,7 @@ public class GameMaster : MonoBehaviour
     bool is_onecall_gamestart = false;//ゲーム開始時1度だけ呼ぶ用
 
     public float timer_time { get; set; } = 60;//ゲーム終了までの時間
-    float titlescene_move_count = 3f;//タイトルシーン遷移までの時間
+    float titlescene_move_count = 1f;//タイトルシーン遷移までの時間
 
     float boss_recast_tortal_time = 5f;//ボスの出現間隔
     float boss_recast_time = 0;
@@ -51,7 +51,8 @@ public class GameMaster : MonoBehaviour
     public int _HP { get; set; } = 5;//HP
     public int special_count { get; set; } = 3;//Bomb回数
     public int score_tortal_point { get; set; } = 0;//スコアトータルポイント
-    public int score_point { get; set; } = 10;//弾一個10点
+    public static int high_score_point { get; set; } = 0;//ハイスコアポイント
+public int score_point { get; set; } = 10;//弾一個10点
 
     
 
@@ -117,7 +118,7 @@ public class GameMaster : MonoBehaviour
         }
 
        
-        HP_Watching();//HP監視　0になったらis_game_end false ゲーム終了
+        HP_Watching();//HP監視　0になったらis_game_end =true ゲーム終了
 
     }
 
@@ -138,7 +139,7 @@ public class GameMaster : MonoBehaviour
         
     }
 
-    void Timer()
+    void Timer()//ゲーム終了までの時間　右上UI
     {
         timer_time -= Time.deltaTime;
 
@@ -147,6 +148,7 @@ public class GameMaster : MonoBehaviour
         {
             timer_time = 0;
             
+            StartCoroutine("MoveTitleScene");
 
         }
        
@@ -169,6 +171,20 @@ public class GameMaster : MonoBehaviour
 
     private IEnumerator MoveTitleScene()
     {
+        //残り時間0、もしくはゲームオーバー時　CharacterControl外して無敵にする。スコア保存後タイトル遷移
+        CharacterControl.enabled = false;
+        Character_Image.layer = 16;
+
+        if (score_tortal_point > high_score_point)
+        {
+            high_score_point = score_tortal_point;
+            //PlayerPrefs.SetInt("HIGHSCORE", high_score_point);
+            //PlayerPrefs.Save();
+            
+            //上記は後で追加 
+
+        }
+
         yield return new WaitForSeconds(titlescene_move_count);
 
         //フェード開始
@@ -211,8 +227,12 @@ public class GameMaster : MonoBehaviour
             Character_Image.layer = 16;
 
         yield return new WaitForSeconds(invincible_time);
+        if(is_game_end == false)
+        {
+            Character_Image.layer = 10;//ゲーム終了時の無敵処理後に解除されるのを防止
+        }
            
-            Character_Image.layer = 10;
+            
         
     }
 
